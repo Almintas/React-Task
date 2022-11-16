@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { RegisterButton } from "../../Components/Buttons/RegisterButton/RegisterButton";
 import { FormWrapper, InputWrapperEmail, InputWrapperPassword } from "./RegisterPage.styled";
 
 
 export const RegisterPage = () => {
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [registerError, setRegisterError] = useState('');
+
+
     const handleRegisterButton = (event) => {
         event.preventDefault();
 
@@ -14,13 +20,17 @@ export const RegisterPage = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: '',
-                password: 'kikitata'
+                email: userEmail,
+                password: userPassword
             })
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            if (data.err) {
+                setRegisterError(data.err);
+            } else {
+                console.log('success')
+            }
         })
 };
 
@@ -29,10 +39,22 @@ export const RegisterPage = () => {
 
 return (
     <FormWrapper onSubmit={handleRegisterButton}>
-        <InputWrapperEmail type='email' placeholder='Email' />
-        <InputWrapperPassword type='password' placeholder='Password' />
+        
+        <InputWrapperEmail type='email' 
+        placeholder='Email'  
+        onChange={(event) => {
+            setUserEmail(event.target.value);
+        }} />
+        
+        <InputWrapperPassword type='password' 
+        placeholder='Password' 
+        onChange={(event) => {
+            setUserPassword(event.target.value);
+        }} />
+        
         <br />
         <RegisterButton />
+        {registerError && <h3>{registerError}</h3>}
     </FormWrapper>
 )
 };
