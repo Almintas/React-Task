@@ -1,21 +1,48 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from './Pages/Home/HomePage.jsx';
 import { Menu } from './Components/Menu/Menu.jsx';
-import { AddPage } from './Pages/Add/AddPage.jsx';
-import { LoginPage } from './Pages/Login/LoginPage.jsx';
-import { RegisterPage } from './Pages/Register/RegisterPage.jsx';
+import React, { useState } from 'react';
+import { PageLayout } from './Pages/PageLayout/PageLayout';
+
+const HomePage = React.lazy(() => import('./Pages/Home/HomePage'));
+const LoginPage = React.lazy(() => import('./Pages/Login/LoginPage'));
+const RegisterPage = React.lazy(() => import('./Pages/Register/RegisterPage'));
+const AddPage = React.lazy(() => import('./Pages/Add/AddPage'));
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <div className="App">
       <Menu />
       <Routes>
+
+        <Route path='/' element={<PageLayout user={user} />} />
+        <Route index element={
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <HomePage />
+          </React.Suspense>
+        } />
+
+        <Route path='/add' element={
+          <React.Suspense fallback={<div>Loading...</div>}>
+            
+            <AddPage />
+          </React.Suspense>
+        } />
+
         <Route>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/Login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/add' element={<AddPage />} />
+          <Route path='/login' element={
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <LoginPage />
+            </React.Suspense>
+          } />
+
+          <Route path='/register' element={
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <RegisterPage />
+            </React.Suspense>
+          } />
         </Route>
       </Routes>
     </div>

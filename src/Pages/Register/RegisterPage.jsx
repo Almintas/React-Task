@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { RegisterButton } from "../../Components/Buttons/RegisterButton/RegisterButton";
-import { FormWrapper, InputWrapperEmail, InputWrapperPassword } from "./RegisterPage.styled";
+import { FormWrapper, InputWrapper } from "./RegisterPage.styled";
+import { BASE_URL } from "../../Components/API/API";
+import { useNavigate } from "react-router-dom";
 
 
-export const RegisterPage = () => {
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
+const RegisterPage = () => {
+    const [userRegisterEmail, setUserEmail] = useState('');
+    const [userRegisterPassword, setUserPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
+    const navigate = useNavigate();
 
 
     const handleRegisterButton = (event) => {
         event.preventDefault();
 
-        const BASE_URL = ('https://autumn-delicate-wilderness.glitch.me/v1/');
-
-        fetch(BASE_URL + 'auth/register', {
+        fetch(`${BASE_URL}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: userEmail,
-                password: userPassword
+                email: userRegisterEmail,
+                password: userRegisterPassword
             })
         })
         .then(res => res.json())
@@ -29,7 +30,7 @@ export const RegisterPage = () => {
             if (data.err) {
                 setRegisterError(data.err);
             } else {
-                console.log('success')
+                navigate('/');
             }
         })
 };
@@ -40,21 +41,25 @@ export const RegisterPage = () => {
 return (
     <FormWrapper onSubmit={handleRegisterButton}>
         
-        <InputWrapperEmail type='email' 
+        <InputWrapper type='email' 
         placeholder='Email'  
         onChange={(event) => {
             setUserEmail(event.target.value);
         }} />
         
-        <InputWrapperPassword type='password' 
+        <InputWrapper type='password' 
         placeholder='Password' 
         onChange={(event) => {
             setUserPassword(event.target.value);
         }} />
         
         <br />
+
         <RegisterButton />
         {registerError && <h3>{registerError}</h3>}
+
     </FormWrapper>
 )
 };
+
+export default RegisterPage;

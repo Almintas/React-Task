@@ -1,7 +1,7 @@
 import { DivWrapper } from "./HomePage.styled";
 
 
-export const HomePage = () => {
+const HomePage = () => {
     return (
         <>
         <DivWrapper>
@@ -10,3 +10,5 @@ export const HomePage = () => {
         </>
     )
 }
+
+export default HomePage;

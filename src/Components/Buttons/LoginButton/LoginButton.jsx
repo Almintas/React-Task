@@ -1,7 +1,10 @@
+import { LoginButtonWrapper } from "./LoginButton.styled";
 
 
 export const LoginButton = () => {
     return(
-        <button>Login</button>
+        <>
+        <LoginButtonWrapper>Login</LoginButtonWrapper>
+        </>
     )
 };
