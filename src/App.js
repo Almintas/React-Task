@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Menu } from './Components/Menu/Menu.jsx';
-import React, { useState } from 'react';
+import React from 'react';
 import { PageLayout } from './Pages/PageLayout/PageLayout';
 
 const HomePage = React.lazy(() => import('./Pages/Home/HomePage'));
@@ -10,14 +10,13 @@ const RegisterPage = React.lazy(() => import('./Pages/Register/RegisterPage'));
 const AddPage = React.lazy(() => import('./Pages/Add/AddPage'));
 
 function App() {
-  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
       <Menu />
       <Routes>
 
-        <Route path='/' element={<PageLayout user={user} />} />
+        <Route path='/' element={<PageLayout />} />
         <Route index element={
           <React.Suspense fallback={<div>Loading...</div>}>
             <HomePage />

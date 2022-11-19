@@ -30,6 +30,7 @@ const LoginPage = () => {
                 setLoginError(data.err)
             } else {
                 navigate('/')
+                localStorage.setItem('token', data.token);
             }
         })
     }
