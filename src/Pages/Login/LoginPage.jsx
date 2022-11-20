@@ -5,7 +5,7 @@ import { LoginButton } from "../../Components/Buttons/LoginButton/LoginButton"
 import { FormWrapper, InputWrapper } from "./LoginPage.styled"
 
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
     const [userLoginEmail, setUserLoginEmail] = useState('');
     const [userLoginPassword, setUserLoginPassword] = useState('');
     const navigate = useNavigate();
@@ -29,10 +29,11 @@ const LoginPage = () => {
             if(data.err) {
                 setLoginError(data.err)
             } else {
-                navigate('/')
                 localStorage.setItem('token', data.token);
             }
         })
+        navigate('/')
+        onLogin()
     }
 
     return (

@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BASE_URL } from "../../Components/API/API";
 
 
 const HomePage = () => {
-    const [userSkill, setUserSkill] = useState('');
-
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -17,7 +15,7 @@ const HomePage = () => {
         .then(res => res.json())
         .then(data => {
             if(data.err) {
-                alert(data.err)
+                alert('Something is wrong')
             } else {
                 console.log(data)
             }
@@ -26,9 +24,7 @@ const HomePage = () => {
 
     return (
         <>
-        <form>
-            <h1>{userSkill}</h1>
-        </form>
+        
         </>
     )
 }
