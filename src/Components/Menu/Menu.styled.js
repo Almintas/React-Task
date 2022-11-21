@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Title = styled.div`
-`;
 
 export const StyledLink = styled(Link)`
     padding: 5px;

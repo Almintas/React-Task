@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BASE_URL } from "../../Components/API/API";
 import { AddButton } from "../../Components/Buttons/AddButton/AddButton";
+import { StyledLink } from "../../Components/Menu/Menu.styled";
+import { DivWrapper, FormWrapper, InputTextareaWrapper, InputWrapper } from "./AddPage.styled";
 
 
 const AddPage = () => {
@@ -17,29 +19,43 @@ const AddPage = () => {
             headers: {
                 Authorization: 'Bearer ' + token,
 
-                'Content-Type' : 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 title: userAddTitle,
                 description: userAddDescription
             })
         })
-        .then(res => res.json())
-        .then(data => {
-            alert('new Skill added')
-        })
-    }
+            .then(res => res.json())
+            .then(alert('Successfully added a new skill'))
+    };
 
     return (
         <>
-        <form onSubmit={handleAddButton}>
-            <input type='text' onChange={(event) => setUserAddTitle(event.target.value)} />
-            <input type='textarea' onChange={(event) => setUserAddDescription(event.target.value)} />
+            <div>
+                <StyledLink to='/'>Home</StyledLink>
+                <StyledLink to='/add'>Add</StyledLink>
+            </div>
 
-            <AddButton />
-        </form>
+            <FormWrapper onSubmit={handleAddButton}>
+                <DivWrapper>
+                    <InputWrapper type='text'
+                        placeholder='Skill'
+                        onChange={(event) => setUserAddTitle(event.target.value)} />
+                </DivWrapper>
+
+                <DivWrapper>
+                    <InputTextareaWrapper type='textarea'
+                        placeholder='Discribe your skill'
+                        onChange={(event) => setUserAddDescription(event.target.value)} />
+                </DivWrapper>
+
+                <br />
+
+                <AddButton />
+            </FormWrapper>
         </>
     )
-}
+};
 
 export default AddPage;

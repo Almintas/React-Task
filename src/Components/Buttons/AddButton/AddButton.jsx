@@ -1,7 +1,8 @@
+import { ButtonWrapper } from "../Button.styled"
 
 
 export const AddButton = () => {
     return (
-        <button>Add</button>
+        <ButtonWrapper>Add</ButtonWrapper>
     )
-}
+};

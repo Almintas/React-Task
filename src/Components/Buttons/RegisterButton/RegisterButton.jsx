@@ -1,10 +1,8 @@
-import { RegisterButtonWrapper } from "./RegisterButton.styled";
+import { ButtonWrapper } from "../Button.styled";
 
 
 export const RegisterButton = () => {
     return (
-        <>
-        <RegisterButtonWrapper>Register</RegisterButtonWrapper>
-        </>
+        <ButtonWrapper>Register</ButtonWrapper>
     )
 };

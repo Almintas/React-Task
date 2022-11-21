@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const RegisterButtonWrapper = styled.button`
+export const ButtonWrapper = styled.button`
 margin-top: 30px;
 border-radius: 10px;
 height: 30px;

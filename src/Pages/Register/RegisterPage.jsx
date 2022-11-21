@@ -3,6 +3,7 @@ import { RegisterButton } from "../../Components/Buttons/RegisterButton/Register
 import { FormWrapper, InputWrapper } from "./RegisterPage.styled";
 import { BASE_URL } from "../../Components/API/API";
 import { useNavigate } from "react-router-dom";
+import { StyledLink } from "../../Components/Menu/Menu.styled";
 
 
 const RegisterPage = () => {
@@ -25,41 +26,45 @@ const RegisterPage = () => {
                 password: userRegisterPassword
             })
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.err) {
-                setRegisterError(data.err);
-            } else {
-                navigate('/');
-            }
-        })
-};
+            .then(res => res.json())
+            .then(data => {
+                if (data.err) {
+                    setRegisterError(data.err);
+                } else {
+                    navigate('/');
+                    alert('You are now registered')
+                }
+            })
+    };
 
 
 
 
-return (
-    <FormWrapper onSubmit={handleRegisterButton}>
-        
-        <InputWrapper type='email' 
-        placeholder='Email'  
-        onChange={(event) => {
-            setUserEmail(event.target.value);
-        }} />
-        
-        <InputWrapper type='password' 
-        placeholder='Password' 
-        onChange={(event) => {
-            setUserPassword(event.target.value);
-        }} />
-        
-        <br />
+    return (
+        <>
+            <div>
+                <StyledLink to='/login'>Login</StyledLink>
+                <StyledLink to='/register'>Register</StyledLink>
+            </div>
 
-        <RegisterButton />
-        {registerError && <h3>{registerError}</h3>}
+            <FormWrapper onSubmit={handleRegisterButton}>
 
-    </FormWrapper>
-)
+                <InputWrapper type='email'
+                    placeholder='Email'
+                    onChange={(event) => setUserEmail(event.target.value)} />
+
+                <InputWrapper type='password'
+                    placeholder='Password'
+                    onChange={(event) => setUserPassword(event.target.value)} />
+
+                <br />
+
+                <RegisterButton />
+                {registerError && <h3>{registerError}</h3>}
+
+            </FormWrapper>
+        </>
+    )
 };
 
 export default RegisterPage;

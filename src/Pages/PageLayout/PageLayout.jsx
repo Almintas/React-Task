@@ -6,9 +6,5 @@ export const PageLayout = ({ user }) => {
         return <Navigate to='/login' />
     }
 
-    return (
-        <div>
-        <Outlet />
-        </div>
-    )
+    return <Outlet />
 }
